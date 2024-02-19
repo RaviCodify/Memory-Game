@@ -53,21 +53,6 @@ const imageNames = [
   "cube-copy.png",
 ];
 
-startButton.addEventListener("click", () => {
-  count++;
-  heading.innerHTML = "Level " + count;
-  container.style.display = "block";
-  shuffledImageNames = shuffleArray(imageNames);
-  setImages();
-  timeInterval = setInterval(checkForReset, 1000);
-});
-
-function reload() {
-  startButton.innerText = "Next";
-  container.style.display = "none";
-  altArray = [];
-}
-
 function setImages() {
   container.innerHTML = "";
   createBox(4, 4);
@@ -81,32 +66,33 @@ function setImages() {
     img.classList.add("unmatched");
     cell.appendChild(img);
     img.style.display = "none";
-    cell.addEventListener("click", () => {
-      if ((img.style.display = "none")) {
-        img.style.display = "block";
-      } else {
-        img.style.display = "none";
-      }
-      const altPng = img.getAttribute("alt");
-      clickedImgNames.push(altPng);
-      if (clickedImgNames[0] != clickedImgNames[1]) {
-        const alt = altPng.replace(/(-copy)?\.png$/, "");
-        clickedImgAlts.push(alt);
-      } else {
-        clickedImgNames.length = 0;
-        clickedImgAlts.length = 0;
-        img.style.display = "none";
-      }
-
-      if (clickedImgAlts.length === 2) {
-        checkForMatch(clickedImgAlts[0], clickedImgAlts[1]);
-        setTimeout(() => {
-          clickedImgNames.length = 0;
-          clickedImgAlts.length = 0;
-        }, 400);
-      }
-    });
+    cell.addEventListener("click", () => handleCellClick(img));
   });
+}
+
+function handleCellClick(img) {
+  if ((img.style.display = "none")) {
+    img.style.display = "block";
+  } else {
+    img.style.display = "none";
+  }
+  const altPng = img.getAttribute("alt");
+  clickedImgNames.push(altPng);
+  if (clickedImgNames[0] != clickedImgNames[1]) {
+    const alt = altPng.replace(/(-copy)?\.png$/, "");
+    clickedImgAlts.push(alt);
+  } else {
+    clickedImgNames.length = 0;
+    clickedImgAlts.length = 0;
+    img.style.display = "none";
+  }
+  if (clickedImgAlts.length === 2) {
+    checkForMatch(clickedImgAlts[0], clickedImgAlts[1]);
+    setTimeout(() => {
+      clickedImgNames.length = 0;
+      clickedImgAlts.length = 0;
+    }, 400);
+  }
 }
 
 function checkForMatch(firstCell, secondCell) {
@@ -144,4 +130,19 @@ function checkForReset() {
     reload();
     clearInterval(timeInterval);
   }
+}
+
+startButton.addEventListener("click", () => {
+  count++;
+  heading.innerHTML = "Level " + count;
+  container.style.display = "block";
+  shuffledImageNames = shuffleArray(imageNames);
+  setImages();
+  timeInterval = setInterval(checkForReset, 1000);
+});
+
+function reload() {
+  startButton.innerText = "Next";
+  container.style.display = "none";
+  altArray = [];
 }
