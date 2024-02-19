@@ -1,0 +1,14 @@
+Let's break it down.
+
+step 1. Make a 4x4 box.
+step 2. collect 16 pics.
+step 3. Make a function for flipping 5 cards randomly.
+step 5. Make an array for those 5 shuffled cards.
+sgep 6. Ask user to click those 5 cards.
+step 7. Make a compare function to match the card.
+step 8. Write result logic.
+
+In short 
+make box 
+collect pics
+write 3 functions for random shuffle, flip, compare
