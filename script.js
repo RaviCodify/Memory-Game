@@ -124,7 +124,7 @@ function checkForMatch(firstCell, secondCell) {
       matchedImgs.forEach((matchedImg) => {
         matchedImg.src = "other-img/match.png";
       });
-    }, 1000);
+    }, 200);
   } else {
     setTimeout(() => {
       const unMatchedImgs = document.querySelectorAll("img.unmatched");
