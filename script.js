@@ -3,6 +3,7 @@ const heading = document.querySelector(".main-container h1");
 const container = document.querySelector(".container");
 
 let shuffledImageNames = [];
+let clickedImgNames = [];
 let clickedImgAlts = [];
 let altArray = [];
 let count = 0;
@@ -87,12 +88,20 @@ function setImages() {
         img.style.display = "none";
       }
       const altPng = img.getAttribute("alt");
-      const alt = altPng.replace(/(-copy)?\.png$/, "");
-      clickedImgAlts.push(alt);
+      clickedImgNames.push(altPng);
+      if (clickedImgNames[0] != clickedImgNames[1]) {
+        const alt = altPng.replace(/(-copy)?\.png$/, "");
+        clickedImgAlts.push(alt);
+      } else {
+        clickedImgNames.length = 0;
+        clickedImgAlts.length = 0;
+        img.style.display = "none";
+      }
 
       if (clickedImgAlts.length === 2) {
         checkForMatch(clickedImgAlts[0], clickedImgAlts[1]);
         setTimeout(() => {
+          clickedImgNames.length = 0;
           clickedImgAlts.length = 0;
         }, 400);
       }
